@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0a0908;
+  --color-coal: #14110f;
+  --color-smoke: #1d1916;
+  --color-line: #2e2824;
+  --color-bone: #efe9df;
+  --color-mute: #a39a8e;
+  --color-accent: #ff5a2c;
+  --color-accent-soft: #ffb199;
+
+  --font-sans: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  overflow-x: clip;
+  background: var(--color-ink);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Lenis (recommended base styles) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+img,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* Text that a script splits: hidden until it is ready, with a CSS failsafe so
+   it can never stay hidden if the script fails. */
+.pre-split {
+  visibility: hidden;
+  animation: vx-failsafe-show 0s 2.5s forwards;
+}
+@keyframes vx-failsafe-show {
+  to {
+    visibility: visible;
+  }
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -4rem;
+  z-index: 200;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+@layer components {
+  /* Display type */
+  .display {
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  /* Outline text */
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-bone);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+    transition:
+      background-color 0.3s var(--ease-expo),
+      color 0.3s var(--ease-expo),
+      border-color 0.3s var(--ease-expo);
+  }
+  .btn-primary {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+  .btn-primary:hover {
+    background: var(--color-bone);
+  }
+  .btn-ghost {
+    border: 1px solid var(--color-line);
+    color: var(--color-bone);
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-bone);
+  }
+}
+
+/* Code highlight tokens */
+.tok-comment {
+  color: #7d7468;
+  font-style: italic;
+}
+.tok-string {
+  color: #ffb199;
+}
+.tok-keyword {
+  color: #ff7a52;
+}
+.tok-fn {
+  color: #f4efe6;
+  font-weight: 500;
+}
+.tok-tag {
+  color: #e8c07a;
+}
+.tok-number {
+  color: #a6d6ad;
+}
+
+/* Index: CSS-only motion (no JS on the index page) */
+@keyframes vx-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes vx-ticker-slide {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.rise-in {
+  animation: vx-rise-in 0.9s var(--ease-expo) both;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: vx-ticker-slide 28s linear infinite;
+}
+
+@supports (animation-timeline: view()) {
+  .scroll-rise {
+    animation: vx-rise-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in,
+  .scroll-rise {
+    animation: none;
+  }
+  .ticker-track {
+    animation: none;
+  }
+}
+
+/* Horizontal-scroll reduced-motion fallback needs hidden scrollbars on snap rows */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

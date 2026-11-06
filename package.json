@@ -1,0 +1,37 @@
+{
+  "name": "gsap-motion-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "12 Awwwards-level GSAP motion effects, each on its own page with the source one click away. By Vixon Lab.",
+  "license": "MIT",
+  "author": "Vixon Lab <vixonoffice@users.noreply.github.com>",
+  "homepage": "https://vixonlab.ro",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "media": "node scripts/fetch-media.mjs",
+    "capture": "node scripts/capture.mjs"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "gsap": "^3.15.1",
+    "lenis": "^1.3.27",
+    "next": "16.4.5",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.5",
+    "playwright": "1.64.1",
+    "sharp": "^0.34.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

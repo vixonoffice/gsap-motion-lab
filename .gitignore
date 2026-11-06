@@ -1,0 +1,21 @@
+# dependencies
+node_modules
+
+# next
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
+
+# env + secrets
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+# local caches (raw Pexels downloads) and scratch
+.media-cache
+.playwright
+*.log
+.DS_Store
